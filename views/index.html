@@ -1,1 +1,8 @@
-<h1>NP Electronics PCB Utility</h1>
+<h1><%- title %></h1>
+<ul class="list-group">
+  <% pcbs.forEach(pcb => { %>
+    <li class="list-group-item">
+      <b><%= pcb.name %></b>: <%= pcb.type %>
+    </li>
+  <% }); %>
+</ul>
