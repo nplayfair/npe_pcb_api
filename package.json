@@ -6,6 +6,10 @@
   "scripts": {
     "develop": "nodemon app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nplayfair/npe_pcb_api"
+  },
   "author": "nplayfair",
   "license": "ISC",
   "devDependencies": {
@@ -13,6 +17,7 @@
   },
   "dependencies": {
     "koa": "^2.13.0",
+    "koa-ejs": "^4.3.0",
     "koa-json": "^2.0.2",
     "koa-router": "^10.0.0"
   }
