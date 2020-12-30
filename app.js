@@ -2,6 +2,8 @@ const Koa           = require('koa')
 const KoaRouter     = require('koa-router')
 const json          = require('koa-json')
 const render        = require('koa-ejs')
+const serve         = require('koa-static')
+const mount         = require('koa-mount')
 const bodyParser    = require('koa-bodyparser')
 const path          = require('path')
 
@@ -12,6 +14,9 @@ const db = require('./models');
 const app     = new Koa();
 const router  = new KoaRouter();
 const PORT    = process.env.PORT || 3000;
+
+// Static files
+app.use(mount('/public', serve(path.join(__dirname, 'public'))));
 
 // Data source
 const temp_pcbs = [
