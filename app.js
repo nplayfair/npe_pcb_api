@@ -44,20 +44,40 @@ render(app, {
 router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', addPcb);
+
+router.get('/test', ctx => (ctx.body = [
+  ...temp_pcbs
+]));
+router.get('/testadd', tempAdd);
+
+// PCB Routes
 router.get('/pcb/:productCode', showPcb);
+router.get('/all', allPcbs);
 
 
-// List all PCBs
+
+// Route Methods
+// List all PCBs from temp data
 async function index(ctx) {
   await ctx.render('index', {
     title: 'NPE PCB Utility',
-    pcbs: pcbs
+    pcbs: temp_pcbs
   });
+}
+
+// List all PCBs from database
+async function allPcbs(ctx) {
+  await Pcb.findAll()
+    .then(pcbs => {
+      console.log(pcbs);
+      ctx.body = 'Done';
+    })
+    .catch(err => console.log(err));
 }
 
 // Show a single PCB
 async function showPcb(ctx) {
-  let pcb = pcbs.filter(o => o.productCode === ctx.params.productCode)[0];
+  let pcb = temp_pcbs.filter(o => o.productCode === ctx.params.productCode)[0];
   await ctx.render('pcb', {
     title: 'PCB Info',
     pcbData: pcb
@@ -72,17 +92,41 @@ async function showAdd(ctx) {
 // Add a new PCB
 async function addPcb(ctx) {
   const body = ctx.request.body;
-  pcbs.push({name: body.pcbName, type: body.pcbType});
+  temp_pcbs.push({name: body.pcbName, type: body.pcbType});
   await ctx.redirect('/');
 }
 
-router.get('/test', ctx => (ctx.body = [
-  ...pcbs
-]));
+// Test method to add db entry
+async function tempAdd(ctx) {
+  const data = {
+    name: 'Tube Screamer',
+    productCode: 'screamer',
+    type: 'Overdrive',
+    description: 'Green overdrive pedal',
+    image_url: 'screamer.png',
+    bom: 'testbom'
+  }
+
+  let { name, productCode, type, description, image_url, bom } = data;
+  console.log(name, productCode);
+  // Insert into db
+  await Pcb.create({
+    productCode,
+    name,
+    type,
+    description,
+    image_url,
+    bom
+  })
+    .then(pcb => ctx.redirect('/'))
+    .catch(err => console.log(err));
+
+}
+
 
 // Router middleware
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server started`)
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`)
 });
