@@ -2,7 +2,7 @@
 <ul class="list-group">
   <% pcbs.forEach(pcb => { %>
     <li class="list-group-item">
-      <b><%= pcb.name %></b>: <%= pcb.type %>
+      <b><%= pcb.name %></b>: <%= pcb.type %> | <a href="/pcb/<%= pcb.productCode %>">View</a>
     </li>
   <% }); %>
 </ul>

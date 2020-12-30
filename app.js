@@ -10,9 +10,9 @@ const router  = new KoaRouter();
 
 // Data source
 const pcbs = [
-  {name: 'Fuzz Face', type: 'Fuzz' },
-  {name: 'Timmy', type: 'Overdrive' },
-  {name: 'Naga Viper', type: 'Boost' }
+  {productCode: 'FACE', name: 'Fuzz Face', type: 'Fuzz' },
+  {productCode: 'tim', name: 'Timmy', type: 'Overdrive' },
+  {productCode: 'viper', name: 'Naga Viper', type: 'Boost' }
 ]
 
 // JSON Prettier middleware
@@ -33,13 +33,23 @@ render(app, {
 router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', addPcb);
+router.get('/pcb/:productCode', showPcb);
 
 
-// List PCBs
+// List all PCBs
 async function index(ctx) {
   await ctx.render('index', {
     title: 'NPE PCB Utility',
     pcbs: pcbs
+  });
+}
+
+// Show a single PCB
+async function showPcb(ctx) {
+  let pcb = pcbs.filter(o => o.productCode === ctx.params.productCode)[0];
+  await ctx.render('pcb', {
+    title: 'PCB Info',
+    pcbData: pcb
   });
 }
 
