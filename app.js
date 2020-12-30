@@ -43,35 +43,49 @@ render(app, {
 router.get('/', index);
 router.get('/add', showAdd);
 router.post('/add', addPcb);
+router.get('/pcbs', allPcbs);
+router.get('/pcbs/:productCode', showPcb);
 
-router.get('/test', ctx => (ctx.body = [
-  ...temp_pcbs
-]));
-router.get('/testadd', tempAdd);
-
-// PCB Routes
-router.get('/pcb/:productCode', showPcb);
-router.get('/all', allPcbs);
+// API Routes
+router.post('/api/pcbs/:productCode', getPcb);
+router.post('/api/pcbs', allPcbsJSON);
 
 
 
-// Route Methods
+// === Route Methods
 // List all PCBs from temp data
 async function index(ctx) {
-  await ctx.render('index', {
-    title: 'NPE PCB Utility',
-    pcbs: temp_pcbs
-  });
-}
-
-// List all PCBs from database
-async function allPcbs(ctx) {
-  await Pcb.findAll()
+  let pcbs = await db.Pcb.findAll({ raw: true })
     .then(pcbs => {
-      console.log(pcbs);
-      ctx.body = 'Done';
+      return pcbs
     })
     .catch(err => console.log(err));
+  await ctx.render('index', {
+    title: 'NPE PCB Utility',
+    pcbs: pcbs
+  })
+}
+
+// List all PCBs from database as JSON
+async function allPcbsJSON(ctx) {
+  await db.Pcb.findAll()
+    .then(pcbs => {
+      ctx.body = pcbs
+    })
+    .catch(err => console.log(err));
+}
+
+// Get all PCBs from database to display
+async function allPcbs(ctx) {
+  let pcbs = await db.Pcb.findAll({ raw: true })
+    .then(pcbs => {
+      return pcbs
+    })
+    .catch(err => console.log(err));
+  await ctx.render('pcbs', {
+    title: 'NPE PCB Utility',
+    pcbs: pcbs
+  })
 }
 
 // Show a single PCB
@@ -81,6 +95,15 @@ async function showPcb(ctx) {
     title: 'PCB Info',
     pcbData: pcb
   });
+}
+
+// Get a single PCB from database
+async function getPcb(ctx) {
+  await db.Pcb.findOne({ where: { productCode: ctx.params.productCode } })
+    .then(pcb => {
+      ctx.body = pcb.toJSON();
+    })
+    .catch(err => console.log('Error: ', err));
 }
 
 // Show Add PCB page
@@ -125,6 +148,7 @@ async function tempAdd(ctx) {
 
 // Router middleware
 app.use(router.routes()).use(router.allowedMethods());
+
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`)
