@@ -1,25 +1,28 @@
-const Sequelize = require('sequelize')
-const db        = require('../config/database')
-
-const Pcb = db.define('pcb', {
-  name: {
-    type: Sequelize.STRING
-  },
-  productCode: {
-    type: Sequelize.STRING
-  },
-  type: {
-    type: Sequelize.STRING
-  },
-  description: {
-    type: Sequelize.STRING
-  },
-  image_url: {
-    type: Sequelize.STRING
-  },
-  bom: {
-    type: Sequelize.STRING
-  }
-})
-
-module.exports = Pcb;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Pcb extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
+  Pcb.init({
+    name: DataTypes.STRING,
+    productCode: DataTypes.STRING,
+    type: DataTypes.STRING,
+    description: DataTypes.STRING,
+    image_url: DataTypes.STRING,
+    bom: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Pcb',
+  });
+  return Pcb;
+};

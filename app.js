@@ -6,14 +6,8 @@ const bodyParser    = require('koa-bodyparser')
 const path          = require('path')
 
 // Database
-const db = require('./config/database')
-
-const Pcb = require('./models/Pcb');
-
-// Test DB
-// db.authenticate()
-//   .then(() => console.log('Database connected'))
-//   .catch(err => console.log('Error connecting to DB: ' + err));
+// const db = require('./config/database')
+const db = require('./models');
 
 const app     = new Koa();
 const router  = new KoaRouter();
