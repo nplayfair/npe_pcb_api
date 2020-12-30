@@ -1,16 +1,26 @@
-const Koa         = require('koa')
-const KoaRouter   = require('koa-router')
-const json        = require('koa-json')
-const render      = require('koa-ejs')
-const bodyParser  = require('koa-bodyparser')
-const path        = require('path')
-require('dotenv').config()
+const Koa           = require('koa')
+const KoaRouter     = require('koa-router')
+const json          = require('koa-json')
+const render        = require('koa-ejs')
+const bodyParser    = require('koa-bodyparser')
+const path          = require('path')
+
+// Database
+const db = require('./config/database')
+
+const Pcb = require('./models/Pcb');
+
+// Test DB
+// db.authenticate()
+//   .then(() => console.log('Database connected'))
+//   .catch(err => console.log('Error connecting to DB: ' + err));
 
 const app     = new Koa();
 const router  = new KoaRouter();
+const PORT    = process.env.PORT || 3000;
 
 // Data source
-const pcbs = [
+const temp_pcbs = [
   {productCode: 'FACE', name: 'Fuzz Face', type: 'Fuzz' },
   {productCode: 'tim', name: 'Timmy', type: 'Overdrive' },
   {productCode: 'viper', name: 'Naga Viper', type: 'Boost' }
