@@ -118,34 +118,6 @@ async function addPcb(ctx) {
   await ctx.redirect('/');
 }
 
-// Test method to add db entry
-async function tempAdd(ctx) {
-  const data = {
-    name: 'Tube Screamer',
-    productCode: 'screamer',
-    type: 'Overdrive',
-    description: 'Green overdrive pedal',
-    image_url: 'screamer.png',
-    bom: 'testbom'
-  }
-
-  let { name, productCode, type, description, image_url, bom } = data;
-  console.log(name, productCode);
-  // Insert into db
-  await Pcb.create({
-    productCode,
-    name,
-    type,
-    description,
-    image_url,
-    bom
-  })
-    .then(pcb => ctx.redirect('/'))
-    .catch(err => console.log(err));
-
-}
-
-
 // Router middleware
 app.use(router.routes()).use(router.allowedMethods());
 
