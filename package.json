@@ -11,18 +11,21 @@
     "type": "git",
     "url": "https://github.com/nplayfair/npe_pcb_api"
   },
-  "author": "nplayfair",
+  "author": "Nick Playfair <nick@playfair.dev>",
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.6"
   },
   "dependencies": {
+    "enforce-node-path": "^1.0.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-ejs": "^4.3.0",
     "koa-json": "^2.0.2",
+    "koa-morgan": "^1.0.1",
     "koa-mount": "^4.0.0",
+    "koa-response-time": "^2.1.0",
     "koa-router": "^10.0.0",
     "koa-static": "^5.0.0",
     "sequelize": "^6.3.5",
