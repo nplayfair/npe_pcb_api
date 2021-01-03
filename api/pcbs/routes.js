@@ -7,7 +7,7 @@ const router = new Router()
 // Create
 router.post('/', async ctx => {
   const pcb = await controller.create()
-  ctx.body = pcb
+  // TODO create a pcb
 })
 
 // Read all
@@ -17,7 +17,21 @@ router.get('/', async ctx => {
 
 // Read one
 router.get('/:prodCode', async ctx => {
-  ctx.body = await controller.readOne(ctx.params.prodCode)
+  const prodCode = ctx.params.prodCode;
+  ctx.body = await controller.readOne(prodCode)
 })
+
+// Update a PCB
+router.put('/:prodCode', async ctx => {
+  const prodCode = ctx.params.prodCode;
+  // TODO update a pcb
+})
+
+// Delete a PCB
+router.delete('/:prodCode', async ctx => {
+  const prodCode = ctx.params.prodCode;
+  // TODO delete a pcb
+})
+
 
 module.exports = router
