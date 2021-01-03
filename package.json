@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "develop": "nodemon -r dotenv/config app.js",
-    "test": "mocha || true"
+    "develop": "env-cmd -f .env.development nodemon app.js",
+    "test": "env-cmd -f .env.test mocha || true"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.6"
   },
