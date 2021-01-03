@@ -1,12 +1,20 @@
-<h1 class="display-4 mb-4">
+<h1 class="mt-4">
   Add a new PCB
 </h1>
 
-<form action="/add" method="post">
-  <div class="form-group">
-    <input type="text" class="form-control form-control-lg mb-2" name="pcbName" placeholder="Name">
-    <input type="text" class="form-control form-control-lg mb-2" name="pcbType" placeholder="Type">
-  </div>
-    <input type="submit" value="Add" class="btn btn-dark btn-lg">
-    <a href="/" class="btn btn-danger btn-lg">Cancel</a>
-</form>
+<div class="container-sm">
+  <form action="/add" method="post" class="mt-4">
+    <div class="form-group col-sm-7">
+      <input type="text" class="form-control form-control-lg mb-2" name="pcbName" placeholder="Name">
+      <input type="text" class="form-control form-control-lg mb-2" name="pcbType" placeholder="Type">
+      <textarea class="form-control form-control-lg mb-2" name="description" placeholder="Description" rows="3"></textarea>
+      <input type="text" class="form-control form-control-lg mb-2" name="image_url" placeholder="Image URL">
+      <input type="text" class="form-control form-control-lg mb-2" name="bom" placeholder="BOM file">
+    </div>
+    <div class="form-group col-sm-7">
+      <input type="submit" value="Add" class="btn btn-dark btn-lg">
+      <a href="/" class="btn btn-danger btn-lg">Cancel</a>
+    </div>
+      
+  </form>
+</div>

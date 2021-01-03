@@ -1,8 +1,10 @@
-<h1><%- title %></h1>
-<ul class="list-group">
-  <% pcbs.forEach(pcb => { %>
-    <li class="list-group-item">
-      <b><%= pcb.name %></b>: <%= pcb.type %> | <a href="/pcbs/<%= pcb.productCode %>">View</a>
-    </li>
-  <% }); %>
-</ul>
+<main class="container">
+  <h1 class="mt-4"><%- title %></h1>
+  <ul class="list-group mt-3">
+    <% pcbs.forEach(pcb => { %>
+      <li class="list-group-item">
+        <b><%= pcb.name %></b>: <%= pcb.type %> | <a href="/pcbs/<%= pcb.productCode %>">View</a> <button class="btn btn-info">Edit</button>
+      </li>
+    <% }); %>
+  </ul>
+</main>
