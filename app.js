@@ -39,11 +39,6 @@ render(app, {
   debug: false
 });
 
-// Routes
-router.get('/', index);
-router.get('/add', showAdd);
-router.get('/view', allPcbs)
-
 // === Route Methods
 // List all PCBs from temp data
 async function index(ctx) {
