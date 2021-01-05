@@ -3,18 +3,24 @@
 </h1>
 
 <div class="container-sm">
-  <form action="/add" method="post" class="mt-4">
+  <% errors.forEach(error => { %>
+    <div class="alert alert-danger" role="alert"><%= error.text %></div>
+  <% }); %>
+  <% if (message) { %>
+    <div class="alert alert-success"><%= message %></div>
+  <% } %>
+  <form action="/pcbs/add" method="post" class="mt-4">
     <div class="form-group col-sm-7">
-      <input type="text" class="form-control form-control-lg mb-2" name="pcbName" placeholder="Name">
-      <input type="text" class="form-control form-control-lg mb-2" name="pcbType" placeholder="Type">
-      <textarea class="form-control form-control-lg mb-2" name="description" placeholder="Description" rows="3"></textarea>
-      <input type="text" class="form-control form-control-lg mb-2" name="image_url" placeholder="Image URL">
-      <input type="text" class="form-control form-control-lg mb-2" name="bom" placeholder="BOM file">
+      <input type="text" class="form-control form-control-lg mb-2" name="pcbName" placeholder="Name" value="<%= pcbName %>">
+      <input type="text" class="form-control form-control-lg mb-2" name="pcbType" placeholder="Type" value="<%= pcbType %>">
+      <input type="text" class="form-control form-control-lg mb-2" name="productCode" placeholder="Product Code" value="<%= productCode %>">
+      <textarea class="form-control form-control-lg mb-2" name="description" placeholder="Description" rows="3"><%= description %></textarea>
+      <input type="text" class="form-control form-control-lg mb-2" name="image_url" placeholder="Image URL" value="<%= image_url %>">
+      <input type="text" class="form-control form-control-lg mb-2" name="bom" placeholder="BOM file" value="<%= bom %>">
     </div>
     <div class="form-group col-sm-7">
       <input type="submit" value="Add" class="btn btn-dark btn-lg">
       <a href="/" class="btn btn-danger btn-lg">Cancel</a>
     </div>
-      
   </form>
 </div>
