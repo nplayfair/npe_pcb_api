@@ -33,14 +33,6 @@ router.post('/add', async ctx => {
   // Return errors or status 200 if none
   if (errors.length === 0) {
     // Form is valid
-    // db.Pcb.create({
-    //   name: pcbName, 
-    //   productCode, 
-    //   type: pcbType, 
-    //   description, 
-    //   image_url, 
-    //   bom
-    // })
     const newPcb = db.Pcb.build({
       name: pcbName, 
       productCode, 
@@ -49,8 +41,6 @@ router.post('/add', async ctx => {
       image_url, 
       bom
     })
-    console.log(newPcb instanceof db.Pcb);
-    console.log(newPcb.name, ' constructed successfully')
     await newPcb.save()
     await ctx.render('add', {
         title: 'NPE PCB Utility',
@@ -63,20 +53,6 @@ router.post('/add', async ctx => {
         image_url: '',
         bom: ''
       })
-      // .then((pcb) => {
-      //    ctx.render('add', {
-      //     title: 'NPE PCB Utility',
-      //     errors: [],
-      //     message: 'PCB added successfully',
-      //     pcbName: '',
-      //     pcbType: '',
-      //     productCode: '',
-      //     description: '',
-      //     image_url: '',
-      //     bom: ''
-      //   })
-      // })
-      // .catch(err => console.log(err))
   }
   else {
     await ctx.render('add', {
