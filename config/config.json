@@ -1,10 +1,7 @@
 {
   "development": {
     "dialect": "postgres",
-    "host": "localhost",
-    "username": "nick",
-    "password": null,
-    "database": "npe_pcb"
+    "use_env_variable": "DATABASE_URL"
   },
   "test": {
     "dialect": "sqlite",
@@ -20,9 +17,6 @@
         "rejectUnauthorized": false
       }
     },
-    "database": "npe_pcb",
-    "username": "user",
-    "password": "password",
     "use_env_variable": "DATABASE_URL"
 
   }
