@@ -12,7 +12,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       productCode: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       type: {
         type: Sequelize.STRING
