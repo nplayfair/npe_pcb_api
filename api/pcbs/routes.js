@@ -90,7 +90,12 @@ router.put('/:prodCode', async ctx => {
 // Delete a PCB
 router.delete('/:prodCode', async ctx => {
   const prodCode = ctx.params.prodCode;
-  // TODO delete a pcb
+  await db.Pcb.destroy({
+    where: {
+      productCode: prodCode
+    }
+  })
+  this.body = { message: `PCB ${prodCode} deleted` }
 })
 
 module.exports = router
