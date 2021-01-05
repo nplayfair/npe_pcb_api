@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Pcb.init({
     name: DataTypes.STRING,
-    productCode: DataTypes.STRING,
+    productCode: { type: DataTypes.STRING, unique: true },
     type: DataTypes.STRING,
     description: DataTypes.STRING,
     image_url: DataTypes.STRING,
