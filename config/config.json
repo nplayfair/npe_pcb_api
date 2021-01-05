@@ -4,9 +4,8 @@
     "use_env_variable": "DATABASE_URL"
   },
   "test": {
-    "dialect": "sqlite",
-    "storage": "./database.sqlite3",
-    "logging": false
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
   },
   "production": {
     "dialect": "postgres",
