@@ -16,7 +16,6 @@
     "database": "npe_pcb",
     "username": "user",
     "password": "password",
-    "operatorsAliases": false,
     "use_env_variable": "DATABASE_URL"
 
   }
