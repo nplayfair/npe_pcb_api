@@ -1,7 +1,10 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./database.sqlite3"
+    "dialect": "postgres",
+    "host": "localhost",
+    "username": "nick",
+    "password": null,
+    "database": "npe_pcb"
   },
   "test": {
     "dialect": "sqlite",
@@ -9,8 +12,12 @@
     "logging": false
   },
   "production": {
-    "dialect": "sqlite",
-    "storage": "./database.sqlite3",
-    "logging": false
+    "dialect": "postgres",
+    "database": "npe_pcb",
+    "username": "user",
+    "password": "password",
+    "operatorsAliases": false,
+    "use_env_variable": "DATABASE_URL"
+
   }
 }
