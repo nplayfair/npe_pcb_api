@@ -1,5 +1,4 @@
 const Koa           = require('koa')
-const KoaRouter     = require('koa-router')
 const json          = require('koa-json')
 const render        = require('koa-ejs')
 const serve         = require('koa-static')
@@ -9,15 +8,14 @@ const responseTime  = require('koa-response-time')
 const path          = require('path')
 const routes        = require('./routing')
 
+// Instantiate app
+const app     = new Koa();
+
 // Environment variables
 const PORT    = process.env.PORT || 3000;
 
 // Database
 const db = require('./models');
-
-const app     = new Koa();
-const router  = new KoaRouter();
-
 
 // Static files
 app.use(mount('/public', serve(path.join(__dirname, 'public'))));
@@ -39,40 +37,7 @@ render(app, {
   debug: false
 });
 
-// === Route Methods
-// List all PCBs from temp data
-async function index(ctx) {
-  let pcbs = await db.Pcb.findAll({ raw: true })
-    .then(pcbs => {
-      return pcbs
-    })
-    .catch(err => console.log(err));
-  await ctx.render('index', {
-    title: 'NPE PCB Utility',
-    pcbs: pcbs
-  })
-}
-
-// Get all PCBs from database to display
-async function allPcbs(ctx) {
-  let pcbs = await db.Pcb.findAll({ raw: true })
-    .then(pcbs => {
-      return pcbs
-    })
-    .catch(err => console.log(err));
-  await ctx.render('pcbs', {
-    title: 'NPE PCB Utility',
-    pcbs: pcbs
-  })
-}
-
-// Show Add PCB page
-async function showAdd(ctx) {
-  await ctx.render('add');
-}
-
 // Router middleware
-app.use(router.routes()).use(router.allowedMethods());
 app.use(routes.routes());
 
 // Start server
